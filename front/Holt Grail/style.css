@@ -1,0 +1,45 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(113, 205, 236);
+    font-size: 150%;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+}
+
+header {
+    background-color: rgb(212, 212, 67);
+}
+
+aside {
+    background-color: lightgreen;
+    flex-basis: 300px;
+}
+
+main {
+    background-color: lightpink;
+    flex-grow: 1;
+}
+
+footer {
+    background-color: lightsalmon;
+}
+
+.container {
+    display: flex;
+    flex-grow: 1;
+}
+
+main, aside {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
