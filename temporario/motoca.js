@@ -1,0 +1,1 @@
+const rotinaDeMotoca = ['Estudar Dev FullStack', 'Trabalhar(ifood)',''  ]
