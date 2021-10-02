@@ -11,6 +11,22 @@ const listarlances = async (req, res) => {
     }
 };
 
+// Obter
+const obterlance = async (req, res) => {
+    const {id} =req.params;
+    try {
+        const lance = await conexao.query('select * from lances where id = $1', [id]);
+
+        if (lance.rowCount === 0) {
+            return res.status(404).json('lance não encontrado');
+        }
+        return res.status(200).json(lance.rows[0]); 
+
+    } catch (error) {
+        return res.status(400).json(error.message);
+    }
+};
+
 // Criar
 const criarlance = async (req, res) => {
     const { id_provider, id_offer, value, amount } = req.body;
@@ -79,6 +95,7 @@ const excluirlance = async (req, res) => {
 
 module.exports = {
     listarlances,
+    obterlance,
     criarlance,
     editarlance,
     excluirlance

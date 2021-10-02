@@ -1,5 +1,6 @@
 const conexao = require('../conexao');
 
+// Listar
 const listarTransportadores = async (req, res) => {
     try {
         const { rows: transportadores } = await conexao.query('select * from transportadores');
@@ -10,6 +11,7 @@ const listarTransportadores = async (req, res) => {
     }
 };
 
+// Obter
 const obterTransportador = async (req, res) => {
     const {id} =req.params;
     try {
@@ -25,6 +27,7 @@ const obterTransportador = async (req, res) => {
     }
 };
 
+// Criar
 const criarTransportador = async (req, res) => {
     const { name, doc, about, active, site } = req.body;
 
@@ -55,6 +58,7 @@ const criarTransportador = async (req, res) => {
     }
 };
 
+// Editar
 const editarTransportador = async (req, res) => {
     const { id } = req.params;
     const { name, doc, about, active, site } = req.body;
@@ -79,6 +83,7 @@ const editarTransportador = async (req, res) => {
     }
 };
 
+// Excluir
 const excluirTransportador = async (req, res) => {
     const { id } = req.params;
 

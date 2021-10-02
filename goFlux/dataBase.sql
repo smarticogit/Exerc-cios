@@ -34,3 +34,10 @@ CREATE TABLE lances (
   	value numeric,
   	amount numeric
 );
+
+ CREATE TABLE usuarios (
+   	id serial primary key,
+	username varchar(80),
+  	email varchar(80),
+  	passw text
+);
