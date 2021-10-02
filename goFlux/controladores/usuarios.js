@@ -15,6 +15,7 @@ const listarUsuarios = async (req, res) => {
 // Obter
 const obterUsuario = async (req, res) => {
     const { id } = req.params;
+
     try {
         const usuario = await conexao.query('select * from usuarios where id = $1', [id]);
 
@@ -73,6 +74,7 @@ const criarUsuario = async (req, res) => {
 const editarUsuario = async (req, res) => {
     const { id } = req.params;
     const { nome, email, passw } = req.body;
+
     try {
         const usuario = await conexao.query('select * from usuarios where id = $1', [id]);
 
