@@ -515,7 +515,7 @@ function App() {
           <form onSubmit={handleSubmitUsuario}>
             <input name='nome' type="text" placeholder='Nome...' value={formCadastro.nome} onChange={handleChangeCadastro} />
             <input name='email' type="text" placeholder='Email...' value={formCadastro.email} onChange={handleChangeCadastro} />
-            <input name='senha' type="text" placeholder='Senha...' value={formCadastro.senha} onChange={handleChangeCadastro} />
+            <input name='senha' type="password" placeholder='Senha...' value={formCadastro.senha} onChange={handleChangeCadastro} />
             <button> Enviar </button>
           </form>
         </div>}
