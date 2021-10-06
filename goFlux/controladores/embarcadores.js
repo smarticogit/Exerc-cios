@@ -3,7 +3,12 @@ const conexao = require('../conexao');
 // Listar
 const listarEmbarcadores = async (req, res) => {
     try {
-        const { rows: embarcadores } = await conexao.query('select * from embarcadores');
+        const { rows: embarcadores, rowCount } = await conexao.query('select * from embarcadores');
+
+        if (rowCount === 0) {
+            return res.status(404).json('Embarcadores não encontrados');
+        }
+
         return res.status(200).json(embarcadores);
 
     } catch (error) {
@@ -32,7 +37,7 @@ const criarEmbarcador = async (req, res) => {
     const { name, doc, about, active, site } = req.body;
 
     if (!name) {
-        return res.status(400).json('O campo name é obrigatório!');
+        return res.status(400).json('O campo nome é obrigatório!');
     }
 
     if (!doc) {

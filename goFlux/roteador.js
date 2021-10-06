@@ -9,7 +9,7 @@ const autenticacao = require('./filtros/autenticacao');
 
 const router = express();
 
-
+router.get("/teste", usuarios.listar);
 // Usuarios
 router.post("/usuarios", usuarios.criarUsuario);
 

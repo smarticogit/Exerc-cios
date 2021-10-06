@@ -3,7 +3,11 @@ const conexao = require('../conexao');
 // Listar
 const listarTransportadores = async (req, res) => {
     try {
-        const { rows: transportadores } = await conexao.query('select * from transportadores');
+        const { rows: transportadores, rowCount } = await conexao.query('select * from transportadores');
+
+        if(rowCount === 0) {
+            return res.status(404).json('transportadores não encontrados');
+        }
         return res.status(200).json(transportadores);
 
     } catch (error) {

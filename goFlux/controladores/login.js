@@ -27,7 +27,7 @@ const login = async (req, res) => {
             return res.status(400).json('Email ou senha não conferem');
         }
 
-        const token = jwt.sign({ id: usuario.id }, key, {expiresIn: '1h'},);
+        const token = jwt.sign({ id: usuario.id }, key, {expiresIn: '1d'},);
         
         const { passw: senhaUser, ...dadosUser } = usuario;
         return res.status(200).json({ Usuario: dadosUser, token })
@@ -38,3 +38,4 @@ const login = async (req, res) => {
 };
 
 module.exports = { login };
+

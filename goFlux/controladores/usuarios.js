@@ -1,6 +1,10 @@
 const conexao = require('../conexao');
 const bcrypt = require('bcrypt');
 
+const listar = async (req, res) => {
+        return res.status(400).json('OK');
+};
+
 // Listar
 const listarUsuarios = async (req, res) => {
     try {
@@ -119,6 +123,7 @@ const excluirUsuario = async (req, res) => {
 };
 
 module.exports = {
+    listar,
     listarUsuarios,
     obterUsuario,
     criarUsuario,

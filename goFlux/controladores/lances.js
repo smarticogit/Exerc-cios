@@ -3,7 +3,11 @@ const conexao = require('../conexao');
 // Listar
 const listarlances = async (req, res) => {
     try {
-        const { rows: lances } = await conexao.query('select * from lances');
+        const { rows: lances, rowCount } = await conexao.query('select * from lances');
+
+        if (rowCount === 0) {
+            return res.status(404).json('Lances não encontrados');
+        }
         return res.status(200).json(lances);
 
     } catch (error) {
@@ -13,14 +17,14 @@ const listarlances = async (req, res) => {
 
 // Obter
 const obterlance = async (req, res) => {
-    const {id} =req.params;
+    const { id } = req.params;
     try {
         const lance = await conexao.query('select * from lances where id = $1', [id]);
 
         if (lance.rowCount === 0) {
             return res.status(404).json('lance não encontrado');
         }
-        return res.status(200).json(lance.rows[0]); 
+        return res.status(200).json(lance.rows[0]);
 
     } catch (error) {
         return res.status(400).json(error.message);
@@ -30,6 +34,10 @@ const obterlance = async (req, res) => {
 // Criar
 const criarlance = async (req, res) => {
     const { id_provider, id_offer, value, amount } = req.body;
+
+    if (!id_provider && !id_offer && !value && !amount) {
+        res.status(400).json('Preencha todos os campos!')
+    };
 
     try {
         const query = 'insert into lances (id_provider, id_offer, value, amount) values ($1, $2, $3, $4)'

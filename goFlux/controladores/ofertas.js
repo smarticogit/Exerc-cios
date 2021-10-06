@@ -3,7 +3,11 @@ const conexao = require('../conexao');
 // Listar
 const listarOfertas = async (req, res) => {
     try {
-        const { rows: ofertas } = await conexao.query('select * from ofertas');
+        const { rows: ofertas, rowCount } = await conexao.query('select * from ofertas');
+
+        if (rowCount === 0) {
+            return res.status(404).json('Ofertas não encontradas');
+        }
         return res.status(200).json(ofertas);
 
     } catch (error) {
@@ -13,14 +17,14 @@ const listarOfertas = async (req, res) => {
 
 // Obter
 const obterOferta = async (req, res) => {
-    const {id} =req.params;
+    const { id } = req.params;
     try {
         const oferta = await conexao.query('select * from ofertas where id = $1', [id]);
 
         if (oferta.rowCount === 0) {
             return res.status(404).json('oferta não encontrado');
         }
-        return res.status(200).json(oferta.rows[0]); 
+        return res.status(200).json(oferta.rows[0]);
 
     } catch (error) {
         return res.status(400).json(error.message);
@@ -32,15 +36,15 @@ const criarOferta = async (req, res) => {
     const { id_customer, from, to, initial_value, amount, amount_type } = req.body;
 
     if (!id_customer) {
-        return res.status(400).json('O campo nome é id_customer!');
+        return res.status(400).json('O campo nome é obrigatório!');
     }
 
     if (!from) {
-        return res.status(400).json('O campo origin é origin!');
+        return res.status(400).json('O campo origin é obrigatório!');
     }
-    
+
     if (!to) {
-        return res.status(400).json('O campo destiny é destiny!');
+        return res.status(400).json('O campo destiny é obrigatório!');
     }
 
     try {
@@ -61,7 +65,7 @@ const criarOferta = async (req, res) => {
 // Editar
 const editarOferta = async (req, res) => {
     const { id } = req.params;
-    const {  id_customer, from, to, initial_value, amount, amount_type } = req.body;
+    const { id_customer, from, to, initial_value, amount, amount_type } = req.body;
     try {
         const oferta = await conexao.query('select * from ofertas where id = $1', [id]);
 

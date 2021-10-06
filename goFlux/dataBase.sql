@@ -5,7 +5,7 @@ CREATE TABLE embarcadores (
   	name varchar(150) NOT NULL,
   	doc varchar(18) NOT NULL,
   	about text NOT NULL,
-  	active boolean,
+  	active text,
   	site text
 );
 
@@ -14,7 +14,7 @@ CREATE TABLE transportadores (
   	name varchar(150) NOT NULL,
   	doc varchar(18) NOT NULL,
   	about text NOT NULL,
-  	active boolean,
+  	active text,
   	site text
 );
 
@@ -30,7 +30,7 @@ CREATE TABLE ofertas (
 
 CREATE TABLE lances (
 	id_provider int,
-  	id_offer int references ofertas(id),
+  	id_offer int,
   	value numeric,
   	amount numeric
 );
